@@ -43,7 +43,7 @@ const Contacts: React.FC = () => {
             ) 
             : 
             (
-              <div className='flex flex-row'>
+              <div className='flex flex-row flex-warp'>
                 {query.data?.map((res, index) => {
                   const {firstname, lastname, status} = res;
                   return (

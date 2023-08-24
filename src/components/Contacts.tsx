@@ -47,12 +47,12 @@ const Contacts: React.FC = () => {
                 {query.data?.map((res, index) => {
                   const {firstname, lastname, status} = res;
                   return (
-                    <div className='text-yellow-700 border-2 border-yellow-700 rounded-2xl flex flex-col text-left p-5 m-6' key={index}>
+                    <div className='text-yellow-700 border-2 font-semibold text-lg bg-yellow-300 border-yellow-700 rounded-2xl flex flex-col text-left p-5 m-6' key={index}>
                       <p key={firstname}>First Name: {firstname}</p>
                       <p key={lastname}>Last Name: {lastname}</p>
                       <p key={status}>Status: {status}</p>
                       <div className='flex flex-row justify-between'>
-                        <button className='border-2 rounded-lg text-yellow-200 border-yellow-200 p-1.5 font-semibold mt-3' onClick={() => navigate(`/contacts/${index}`)}>Edit</button>
+                        <button className='border-2 rounded-lg text-yellow-600 border-yellow-600 bg-yellow-200 p-1.5 font-semibold mt-3' onClick={() => navigate(`/contacts/${index}`)}>Edit</button>
                         <button className='border-2 rounded-lg text-black bg-red-600 border-red-900 p-1.5 mt-3 font-semibold' onClick={() => handleDelete(index)}>Delete</button>
                       </div>
                     </div>

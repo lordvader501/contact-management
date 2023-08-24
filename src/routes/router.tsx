@@ -2,8 +2,10 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import Contacts from '../components/Contacts';
-import ChartsAndMaps from '../components/ChartsAndMaps';
+import Charts from '../components/Charts';
 import AddNewContacts from '../components/AddNewContacts';
+import EditContact from '../components/EditContact';
+import MapView from '../components/MapView';
 
 const routes = createBrowserRouter([
   {
@@ -25,8 +27,16 @@ const routes = createBrowserRouter([
         element: <AddNewContacts />
       },
       {
-        path: '/charts-and-maps',
-        element: <ChartsAndMaps />
+        path: '/contacts/:id',
+        element: <EditContact />
+      },
+      {
+        path: '/charts',
+        element: <Charts />
+      },
+      {
+        path: '/maps',
+        element: <MapView />
       }
     ]
   },

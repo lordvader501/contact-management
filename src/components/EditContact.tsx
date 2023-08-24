@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAppDispatch } from '../redux/hooks';
-import { addContact } from '../redux/contactsSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { editContact } from '../redux/contactsSlice';
 import ContactsType from '../utils/ContactsType';
+import { useParams,useNavigate } from 'react-router-dom';
 
-const AddNewContacts: React.FC = () => {
+const EditContact: React.FC = () => {
+  const {id} = useParams<{id: string}>();
+  let urlId=0;
+  if (id) {
+    const nid =parseInt(id, 10);
+    urlId = nid;
+  }
+  const contact = useAppSelector<ContactsType | undefined>(store =>
+    store.contacts.contactsList.find(
+      (contact, index) => index === urlId
+    )
+  );
 
-  const { register, handleSubmit, formState:{errors}, reset} = useForm<ContactsType>();
+  const { firstname = '', lastname = '', status = '' } = contact ?? {};
+  const { register, handleSubmit, formState:{errors}, setValue } = useForm<ContactsType>();
   const dispatch = useAppDispatch();
-  const [disabled, setDisabled]= useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setValue('firstname', firstname);
+    setValue('lastname', lastname);
+    setValue('status', status);
+  }, [firstname, lastname, status]);
   
-  const submitHandler:SubmitHandler<ContactsType> = (data) => {
-    dispatch(addContact({
-      firstname: data.firstname,
-      lastname: data.lastname,
-      status: data.status
-    }));
-    reset();
-    setDisabled(true);
-    const disabledTimmer = setTimeout(()=> {
-      setDisabled(false);
-    },3000);
-
-    return () => {
-      clearTimeout(disabledTimmer);
-    };
-
+  const submitHandler:SubmitHandler<ContactsType> = (updatedContact) => {
+    dispatch(editContact({urlId, updatedContact}));
+    navigate('/');
   };
   return (
     <div className='h-screen w-full flex justify-center text-yellow-300 bg-black bg-opacity-95'>
@@ -44,11 +50,11 @@ const AddNewContacts: React.FC = () => {
             <option value='inactive'>Inactive</option>
           </select>
           {errors.status && <span>Feild required!</span>}
-          <button type='submit' className='border-2 border-yellow-700 bg-yellow-400 text-black font-medium rounded-xl py-2 mt-3' disabled={disabled}>Submit</button>
+          <button type='submit' className='border-2 border-yellow-700 bg-yellow-400 text-black font-medium rounded-xl py-2 mt-3'>Submit</button>
         </form>
       </div>    
     </div>
   );
 };
 
-export default AddNewContacts;
+export default EditContact;

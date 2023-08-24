@@ -26,7 +26,7 @@ const Contacts: React.FC = () => {
   };
 
   return (
-    <div className='h-screen w-full flex justify-center bg-black bg-opacity-95'>
+    <div className='min-h-screen w-full flex justify-center bg-black bg-opacity-95'>
       <div className='p-6 w-full flex flex-col justify-start items-center'>
         <button onClick={()=>{navigate('/contacts/new');}} className='border-[3px] border-yellow-700 bg-yellow-400 rounded-2xl text-black font-medium px-2 py-1 my-6 w-40 '>Create Contact</button>
         { 
@@ -43,7 +43,7 @@ const Contacts: React.FC = () => {
             ) 
             : 
             (
-              <div className='flex flex-row flex-warp'>
+              <div className='flex flex-wrap justify-center w-full'>
                 {query.data?.map((res, index) => {
                   const {firstname, lastname, status} = res;
                   return (

@@ -1,5 +1,5 @@
 # Task
-
+deployed link:- [contact Managemet](https://contact-management-lordvader501.vercel.app/)
 Created a Contact Management with Charts and Maps using ReactJS, TypeScript,
 TailwindCSS, React Router v6, Redux, Redux-persist, chart.js, leaflet, axios and React Query aka TanstackQuery.
 
@@ -28,7 +28,7 @@ Build a simple dashboard with:
 
 ## How to get Started
 
-- clone the repository `git clone ...`
+- clone the repository `git clone https://github.com/lordvader501/contact-management.git`
 - install dependencies `yarn install`
 
 In the project directory, you can run:
